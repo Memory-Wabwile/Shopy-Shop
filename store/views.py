@@ -14,3 +14,9 @@ def cart(request):
 
     return request (request , 'store/cart.html' , {"message" : message})
 
+def checkout(request):
+
+    message = "This is the checkout page"
+
+    return request (request , 'store/checkout.html' , {"message" : message})
+
