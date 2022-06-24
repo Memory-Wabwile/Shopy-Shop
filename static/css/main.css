@@ -1,9 +1,7 @@
 .bg-dark{
     background-color: #4f868c!important;
 }
-.product{
-    border-radius: 0 0 4px 4px;
-}
+/* navbar style */
 #cart-icon{
     width: 50px;
     display: inline-block;
@@ -18,4 +16,15 @@
     height: 23px;
     border-radius: 50%;
     font-size: 14px;
+}
+
+/* stores template styles */
+.box-element{
+    box-shadow: hsl(0, 0%, 80%) 0 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+.product{
+    border-radius: 0 0 4px 4px;
 }
