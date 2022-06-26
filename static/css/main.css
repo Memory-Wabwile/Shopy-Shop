@@ -56,11 +56,10 @@
     display: inline-block;
     font-weight: 700;
     padding-right: 10px;
-    width: 24px;
+    
 }
 .change-quantity{
     width: 12px;
-    height: 12px;
     cursor: pointer;
     display: block;
 }
