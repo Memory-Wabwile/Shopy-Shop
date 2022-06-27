@@ -19,7 +19,7 @@ def cart(request):
     
     message = "This is the cart page"
 
-    context = {'items':items}
+    context = {'items':items , "order":order}
     return render (request , 'store/cart.html' , context)
 
 def checkout(request):
