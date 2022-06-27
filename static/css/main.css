@@ -7,6 +7,9 @@
     display: inline-block;
     margin-left: 15px;
 }
+body{
+   padding-top: 2%;
+}
 #cart-total{
     display: block;
     text-align: center;

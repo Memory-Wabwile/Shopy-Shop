@@ -1,12 +1,13 @@
 from email import message
 from django.shortcuts import render
+from .models import *
 
 # Create your views here.
 def store(request):
-
-    message = "Thisis the stores page"
-
-    return render (request , 'store/store.html' , {"message" : message})
+    products = Product.objects.all()
+    # message = "Thisis the stores page"
+    context = {'products':products}
+    return render (request , 'store/store.html' ,context)
 
 def cart(request):
 
