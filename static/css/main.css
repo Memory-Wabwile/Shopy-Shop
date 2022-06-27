@@ -63,3 +63,8 @@
     cursor: pointer;
     display: block;
 }
+.form-field{
+    width: 250px;
+    display: inline-block;
+    padding: 5px;
+}
