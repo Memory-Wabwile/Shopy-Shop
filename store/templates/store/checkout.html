@@ -16,6 +16,8 @@
                 </div>
                 <div id="shipping-info">
                     <hr>
+                    <h5>Shipping Information</h5>
+                    <hr>
                     <div style="width: 250px; display: inline-block;padding: 5px;" class="form-field">
                         <input class="form-control" type="text" name="address" placeholder="Address..">
                     </div>
@@ -48,17 +50,19 @@
             <hr>
             <h3>Order Summary</h3>
             <hr>
+            {% for item in items %}
             <div class="cart-row">
                 <div style="flex: 2;">
-                    <img class="row-image" src="{% static 'images/puppies.jpg' %}" alt="">
+                    <img class="row-image" src="{{item.product.imageURL}}" alt="">
                 </div>
-                <div style="flex: 2;"> Puppies </div>
-                <div style="flex: 1;"> $ 30</div>
-                <div style="flex: 1;"> x2 </div>
+                <div style="flex: 2;"> {{item.product.name}} </div>
+                <div style="flex: 1;"> {{item.product.price}} </div>
+                <div style="flex: 1;"> x{{item.quanity}} </div>
             </div>
+            {% endfor %}
 
-            <h5>Items : 2</h5>
-            <h5>Total : 60</h5>
+            <h5>Items : {{order.get_cart_items}}</h5>
+            <h5>Total : {{order.get_cart_total|floatformat:2}}</h5>
         </div>
     </div>
 </div>

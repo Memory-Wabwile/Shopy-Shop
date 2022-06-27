@@ -16,7 +16,7 @@ def cart(request):
         items = order.orderitem_set.all()
     else:
         items=[]
-    
+        order = {'get_cart_total': 0 , 'get_cart_items':0}
     message = "This is the cart page"
 
     context = {'items':items , "order":order}
@@ -24,7 +24,16 @@ def cart(request):
 
 def checkout(request):
 
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items=[]
+        order = {'get_cart_total': 0 , 'get_cart_items':0}
+    
+    context = {'items':items , "order":order}
     message = "This is the checkout page"
 
-    return render (request , 'store/checkout.html' , {"message" : message})
+    return render (request , 'store/checkout.html' ,context)
 
