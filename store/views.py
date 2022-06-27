@@ -10,10 +10,17 @@ def store(request):
     return render (request , 'store/store.html' ,context)
 
 def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
+        items = order.orderitem_set.all()
+    else:
+        items=[]
+    
+    message = "This is the cart page"
 
-    message = "Thisis the cart page"
-
-    return render (request , 'store/cart.html' , {"message" : message})
+    context = {'items':items}
+    return render (request , 'store/cart.html' , context)
 
 def checkout(request):
 
