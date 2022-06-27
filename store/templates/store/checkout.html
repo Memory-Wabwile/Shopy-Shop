@@ -33,14 +33,18 @@
                     </div>
                 </div>
                 <hr>
-                <input type="submit" value="Continue">
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
             </form>
+        </div>
+        <br>
+        <div class="box-element hidden" id="payment-info" >
+            <small>Paypal</small>
         </div>
     </div>
 
     <div class="col-lg-6">
         <div class="box-element">
-
+            <a class="btn btn-outline-dark" href="{% url 'cart' %}"> &#x2190; Back to cart </a>
         </div>
     </div>
 </div>
