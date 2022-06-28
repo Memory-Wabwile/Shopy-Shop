@@ -39,7 +39,7 @@
             </form>
         </div>
         <br>
-        <div style="display: none;" class=" hidden box-element" id="payment-info">
+        <div class=" hidden box-element" id="payment-info">
             <small>Paypal</small>
         </div>
     </div>
@@ -71,7 +71,16 @@
     var shipping = '{{order.shipping}}'
 
     if (shipping ==  False){
-        document.
+        document.getElementById('shipping-info').innerHTML = ''
     }
+
+    var form = document.getElementById('form')
+
+    form.addEventListener('submit' , function(e){
+        e.preventDefault()
+        console.log("form submitted")
+        document.getElementById('form-button').classList.add('hidden')
+        
+    })
 </script>
 {% endblock content %}
