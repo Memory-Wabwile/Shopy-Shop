@@ -39,6 +39,7 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+# if items digital status is set to false means they are physical then ship else dont ship
     @property
     def shipping(self):
         shipping = False

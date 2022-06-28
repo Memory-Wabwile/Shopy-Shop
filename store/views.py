@@ -14,9 +14,11 @@ def store(request):
         order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
+       
+        # for guest user
     else:
         items=[]
-        order = {'get_cart_total': 0 , 'get_cart_items':0}
+        order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
         cartItems = order['get_cart_items']
 
     context = {'products':products , 'cartItems' : cartItems}
@@ -30,7 +32,7 @@ def cart(request):
         cartItems = order.get_cart_items
     else:
         items=[]
-        order = {'get_cart_total': 0 , 'get_cart_items':0}
+        order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
         cartItems = order['get_cart_items']
     message = "This is the cart page"
 
@@ -46,10 +48,10 @@ def checkout(request):
         cartItems = order.get_cart_items
     else:
         items=[]
-        order = {'get_cart_total': 0 , 'get_cart_items':0}
+        order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
         cartItems = order['get_cart_items']
     
-    context = {'items':items , "order":order , 'cartItems':cartItems}
+    context = {'items':items , "order":order , 'cartItems':cartItems }
     message = "This is the checkout page"
 
     return render (request , 'store/checkout.html' ,context)
