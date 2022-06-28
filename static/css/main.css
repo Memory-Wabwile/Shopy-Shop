@@ -75,6 +75,6 @@ body{
     padding: 5px;
 }
 .hidden{
-    display: none !important;
+    display: none ;
         
 }
