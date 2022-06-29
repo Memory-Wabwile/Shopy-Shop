@@ -43,6 +43,7 @@ def cart(request):
         
         # will show on tha navbar quanityty on cart page for anonymous user
         for i in cart:
+            try:
             cartItems += cart[i]['quanity']
 
             product = Product.objects.get(id=i)
@@ -56,13 +57,20 @@ def cart(request):
                      'id' : product.id,
                      'name' : product.name,
                      'price': product.price,
-                     'imageURL' : product.imageURL
+                     'imageURL' : product.imageURL,
                  },
                  'quanity' : cart[i]['quanity'],
                  'get_total' : total,
             }
             items.append(item)
-            
+
+            if product.digital == False :
+                order['shipping'] = True
+
+                # try catch for if a user  adds item to cart and afterwards the item is deleted from the database
+        except:
+            pass
+
     message = "This is the cart page"
 
     context = {'items':items , "order":order , 'cartItems':cartItems}
