@@ -35,6 +35,9 @@ function addCookieItem(productId , action){
             delete cart[productId];
         }
     }
+    console.log("cart:" ,  cart)
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    location.reload()
 }
 
 
