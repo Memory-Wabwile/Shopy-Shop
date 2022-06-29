@@ -59,10 +59,10 @@
         if(cart == undefined){
             cart = {}
             console.log('Cart was created')
-            document.cookie = 'cart=' +JSON.stringify(cart)
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
         }
-        
-        console.log('cart:', cart)
+
+        console.log('Cart:', cart)
 
     </script>
 
