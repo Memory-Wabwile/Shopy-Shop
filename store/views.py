@@ -40,6 +40,29 @@ def cart(request):
         items=[]
         order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
         cartItems = order['get_cart_items']
+        
+        # will show on tha navbar quanityty on cart page for anonymous user
+        for i in cart:
+            cartItems += cart[i]['quanity']
+
+            product = Product.objects.get(id=i)
+            total = (product.price * cart[i]['quanity'])
+
+            order['get_cart_total'] += total
+            order['get_cart_items'] += cart[i]['quanity']
+
+            item = {
+                 'product' : {
+                     'id' : product.id,
+                     'name' : product.name,
+                     'price': product.price,
+                     'imageURL' : product.imageURL
+                 },
+                 'quanity' : cart[i]['quanity'],
+                 'get_total' : total,
+            }
+            items.append(item)
+            
     message = "This is the cart page"
 
     context = {'items':items , "order":order , 'cartItems':cartItems}
