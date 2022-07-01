@@ -42,8 +42,8 @@ def cart(request):
         cartItems = order['get_cart_items']
         
         # will show on tha navbar quanityty on cart page for anonymous user
-        for i in cart:
-            try:
+    for i in cart:
+        try:
             cartItems += cart[i]['quanity']
 
             product = Product.objects.get(id=i)
