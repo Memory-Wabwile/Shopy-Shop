@@ -19,9 +19,11 @@ def store(request):
        
         # for guest user
     else:
-        items=[]
-        order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
-        cartItems = order['get_cart_items']
+        # items=[]
+        # order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
+        # cartItems = order['get_cart_items']
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
 
     context = {'products':products , 'cartItems' : cartItems}
     return render (request , 'store/store.html' ,context)
@@ -33,46 +35,53 @@ def cart(request):
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
-        try:
-            cart = json.loads(request.COOKIES['cart'])
-        except:
-            cart = {}
-        print('Cart:' , cart)
-        items=[]
-        order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
-        cartItems = order['get_cart_items']
+        #copied to utils.py under cookieCart to avoid repetition
+
+    #     try:
+    #         cart = json.loads(request.COOKIES['cart'])
+    #     except:
+    #         cart = {}
+    #     print('Cart:' , cart)
+    #     items=[]
+    #     order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
+    #     cartItems = order['get_cart_items']
         
-        # will show on tha navbar quanityty on cart page for anonymous user
-    for i in cart:
-        try:
-            cartItems += cart[i]['quanity']
+    #     # will show on tha navbar quanityty on cart page for anonymous user
+    # for i in cart:
+    #     try:
+    #         cartItems += cart[i]['quanity']
 
-            product = Product.objects.get(id=i)
-            total = (product.price * cart[i]['quanity'])
+    #         product = Product.objects.get(id=i)
+    #         total = (product.price * cart[i]['quanity'])
 
-            order['get_cart_total'] += total
-            order['get_cart_items'] += cart[i]['quanity']
+    #         order['get_cart_total'] += total
+    #         order['get_cart_items'] += cart[i]['quanity']
 
-            item = {
-                 'product' : {
-                     'id' : product.id,
-                     'name' : product.name,
-                     'price': product.price,
-                     'imageURL' : product.imageURL,
-                 },
-                 'quanity' : cart[i]['quanity'],
-                 'get_total' : total,
-            }
-            items.append(item)
+    #         item = {
+    #              'product' : {
+    #                  'id' : product.id,
+    #                  'name' : product.name,
+    #                  'price': product.price,
+    #                  'imageURL' : product.imageURL,
+    #              },
+    #              'quanity' : cart[i]['quanity'],
+    #              'get_total' : total,
+    #         }
+    #         items.append(item)
 
-            if product.digital == False :
-                order['shipping'] = True
+    #         if product.digital == False :
+    #             order['shipping'] = True
 
-                # try catch for if a user  adds item to cart and afterwards the item is deleted from the database
-        except:
-            pass
+    #             # try catch for if a user  adds item to cart and afterwards the item is deleted from the database
+    #     except:
+    #         pass
 
-    message = "This is the cart page"
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
+
+        message = "This is the cart page"
 
     context = {'items':items , "order":order , 'cartItems':cartItems}
     return render (request , 'store/cart.html' , context)
@@ -85,9 +94,14 @@ def checkout(request):
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
-        items=[]
-        order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
-        cartItems = order['get_cart_items']
+        # items=[]
+        # order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
+        # cartItems = order['get_cart_items']
+
+        cookieData = cookieCart(request)
+        cartItems = cookieData['cartItems']
+        order = cookieData['order']
+        items = cookieData['items']
     
     context = {'items':items , "order":order , 'cartItems':cartItems }
     message = "This is the checkout page"
