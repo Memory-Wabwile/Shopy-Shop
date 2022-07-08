@@ -5,7 +5,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart
+from .utils import cookieCart , cartData
 
 # Create your views here.
 def store(request):
@@ -76,6 +76,7 @@ def cart(request):
     #     except:
     #         pass
 
+        #after cookieCart utils.py
         cookieData = cookieCart(request)
         cartItems = cookieData['cartItems']
         order = cookieData['order']
@@ -88,20 +89,20 @@ def cart(request):
 
 def checkout(request):
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
+    # if request.user.is_authenticated:
+    #     customer = request.user.customer
+    #     order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
+    #     items = order.orderitem_set.all()
+    #     cartItems = order.get_cart_items
+    # else:
         # items=[]
         # order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
         # cartItems = order['get_cart_items']
 
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order']
-        items = cookieData['items']
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
     
     context = {'items':items , "order":order , 'cartItems':cartItems }
     message = "This is the checkout page"
