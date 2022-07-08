@@ -181,4 +181,12 @@ def processOrder(request):
         customer.name = name
         customer.save()
 
+        order = Order.objects.create(
+            customer = customer,
+            complete = False,
+        )
+
+        for item in items:
+            product = Product.objects.get(id=item['product']['id'])
+
     return JsonResponse('Payment Complete' , safe=False)
