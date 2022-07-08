@@ -167,4 +167,18 @@ def processOrder(request):
     else:
         print("user is not logged in")
 
+        print('COOKIES:' , request.COOKIES)
+        name = data['form']['name']
+        email = data['form']['email']
+
+        cookieData = cookieCart(request)
+        items = cookieData['items']
+
+    # if customer isn't registered/logged in we will just look for their email and attach the cart to it and can get all their previous oreders and data
+        customer , created = Customer.objects.get_or_create(
+            email = email,
+        )
+        customer.name = name
+        customer.save()
+
     return JsonResponse('Payment Complete' , safe=False)
