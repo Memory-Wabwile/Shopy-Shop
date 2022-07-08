@@ -10,31 +10,32 @@ from .utils import cookieCart , cartData
 # Create your views here.
 def store(request):
     products = Product.objects.all()
-    # message = "Thisis the stores page"
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    # if request.user.is_authenticated:
+    #     customer = request.user.customer
+    #     order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
+    #     items = order.orderitem_set.all()
+    #     cartItems = order.get_cart_items
        
-        # for guest user
-    else:
+    #     # for guest user
+    # else:
         # items=[]
         # order = {'get_cart_total': 0 , 'get_cart_items':0 , 'shipping':False }
         # cartItems = order['get_cart_items']
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
+   
 
     context = {'products':products , 'cartItems' : cartItems}
     return render (request , 'store/store.html' ,context)
 
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
+    # if request.user.is_authenticated:
+    #     customer = request.user.customer
+    #     order ,  created = Order.objects.get_or_create(customer = customer , complete=False)
+    #     items = order.orderitem_set.all()
+    #     cartItems = order.get_cart_items
+    # else:
         #copied to utils.py under cookieCart to avoid repetition
 
     #     try:
@@ -77,12 +78,12 @@ def cart(request):
     #         pass
 
         #after cookieCart utils.py
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order']
-        items = cookieData['items']
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
-        message = "This is the cart page"
+    message = "This is the cart page"
 
     context = {'items':items , "order":order , 'cartItems':cartItems}
     return render (request , 'store/cart.html' , context)
