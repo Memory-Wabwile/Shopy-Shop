@@ -5,7 +5,7 @@ from .models import *
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart , cartData
+from .utils import cookieCart , cartData , guestOrder
 
 # Create your views here.
 def store(request):
@@ -152,36 +152,7 @@ def processOrder(request):
 
        
     else:
-        print("user is not logged in")
-
-        print('COOKIES:' , request.COOKIES)
-        name = data['form']['name']
-        email = data['form']['email']
-
-        cookieData = cookieCart(request)
-        items = cookieData['items']
-
-    # if customer isn't registered/logged in we will just look for their email and attach the cart to it and can get all their previous oreders and data
-        customer , created = Customer.objects.get_or_create(
-            email = email,
-        )
-        customer.name = name
-        customer.save()
-
-        order = Order.objects.create(
-            customer = customer,
-            complete = False,
-        )
-
-        for item in items:
-            product = Product.objects.get(id=item['product']['id'])
-
-            OrderItem = OrderItem.objects.create(
-                product = product,
-                order = order,
-                quanity = item['quanity'],
-            )
-
+        
     total =float(data['form']['total'])
     order.transaction_id = transaction_id
 
@@ -199,3 +170,4 @@ def processOrder(request):
             zipcode = data['shipping']['zipcode'],
             )  
     return JsonResponse('Payment Complete' , safe=False)
+    # create a guest checkout function 

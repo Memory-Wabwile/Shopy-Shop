@@ -59,3 +59,36 @@ def cartData(request):
         items = cookieData['items']
 
     return {'cartItems':cartItems , 'order':order , 'items':items}
+
+def guestOrder(request,data):
+    print("user is not logged in")
+
+    print('COOKIES:' , request.COOKIES)
+    name = data['form']['name']
+    email = data['form']['email']
+
+    cookieData = cookieCart(request)
+    items = cookieData['items']
+
+    # if customer isn't registered/logged in we will just look for their email and attach the cart to it and can get all their previous oreders and data
+    customer , created = Customer.objects.get_or_create(
+        email = email,
+        )
+    customer.name = name
+    customer.save()
+
+    order = Order.objects.create(
+        customer = customer,
+        complete = False,
+        )
+
+    for item in items:
+        product = Product.objects.get(id=item['product']['id'])
+
+        OrderItem = OrderItem.objects.create(
+            product = product,
+            order = order,
+            quanity = item['quanity'],
+            )
+
+    return order
