@@ -42,7 +42,8 @@
         <br>
         <div class=" hidden box-element" id="payment-info">
             <small>Paypal</small>
-            <button id="make-payment">Make Payment</button>
+            <div id="paypal-button-container"></div>
+            <!-- <button id="make-payment">Make Payment</button> -->
         </div>
     </div>
 
@@ -99,9 +100,12 @@
         document.getElementById('form-button').classList.add('hidden')
         document.getElementById('payment-info').classList.remove('hidden')
     })
-    document.getElementById('make-payment').addEventListener('click' , function(e){
+
+    /*document.getElementById('make-payment').addEventListener('click' , function(e){
         submitFormData()
     })
+    */
+
     function submitFormData(){
         console.log("payment button clicked")
 
@@ -155,5 +159,4 @@
         })
     }
 </script>
-{% endblock content %}
 {% endblock content %}
