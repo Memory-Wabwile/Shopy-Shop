@@ -70,9 +70,14 @@
     </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AVfjCY3nApznaL422jh8TmJ9zeSr7JJ2I9dyzWXNbke0ig_Mmil0F_nKkJseD_xmb0kA4kih5ce9YrtI&currency=USD">
+    //client ID from sandbox paypal
+</script>
 
 <script>
+
+    var total = '{{order.get_cart_total}}'
+
     //render the paypal button into paypal-button-container
     paypal.Buttons({
 
@@ -85,7 +90,7 @@
             return actions.order.create({
                 purchase_units:[{
                     amount:{
-                        value:'0.01'
+                        value:parseFloat(total).toFixed(2)
                     }
                 }]
             });
