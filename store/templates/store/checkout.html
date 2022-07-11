@@ -72,6 +72,20 @@
 
 <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 <script type="text/javascript" >
+
+    //render the paypal button
+    paypal.Buttons({
+        //set up transaction
+        createOrder : function(data,actions){
+            return actions.order.create({
+                purchase_units:[{
+                    amount:{
+                        value:'0.01'
+                    }
+                }]
+            })
+        }
+    })
     var shipping = '{{order.shipping}}'
     var total = '{{order.get_cart_total}}'
 
