@@ -35,17 +35,17 @@
             return cookieValue;
         }
         var csrftoken = getToken('csrftoken');
-       
-        function getCookie(name){
+
+        function getCookie(name) {
             //split cookie string and get all individual name=value pairs in an array
             var cookieArr = document.cookie.split(";");
 
             //loop through the array elements
-            for (var i=0; i<cookieArr.length ; i++){
+            for (var i = 0; i < cookieArr.length; i++) {
                 var cookiePair = cookieArr[i].split("=");
 
                 //removing whitespace at the beginning of the cookie name and compare it with the given string
-                if(name == cookiePair[0].trim()){
+                if (name == cookiePair[0].trim()) {
                     //decode the cokie value and return
                     return decodeURIComponent(cookiePair[1]);
                 }
@@ -55,15 +55,14 @@
             return null;
         }
 
-        var cart =JSON.parse(getCookie('cart'))
-        if(cart == undefined){
+        var cart = JSON.parse(getCookie('cart'))
+        if (cart == undefined) {
             cart = {}
             console.log('Cart was created')
             document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
         }
 
         console.log('Cart:', cart)
-
     </script>
 
 </head>
@@ -71,18 +70,31 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1%;">
         <a class="navbar-brand" href="{% url 'store' %}">Shopy Shop</a>
+
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'store' %}"> Store <span class="sr-only">(current)</span></a>
                 </li>
 
             </ul>
+
+            <form  class="form-inline" action="/search" style="margin: 0 auto;">
+                <div class="input-group">
+                    <input name="querry" class="form-control mr-sm-2" type="search" placeholder="Search"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
+                    </div>
+                </div>
+            </form>
 
             <div class="form-inline my-2 my-lg-0">
                 <a href="#" class="btn btn-warning"> Login </a>
