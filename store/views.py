@@ -1,4 +1,5 @@
 from email import message
+from turtle import title
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import *
@@ -176,5 +177,6 @@ def processOrder(request):
     # create a guest checkout function 
 
 def search(request):
-
-    return render(request , 'store/search.html')
+    querry = request.GET['querry']
+    data = Product.objects.filter(title__icontains = querry).order_by('-id')
+    return render(request , 'store/search.html', {'data':data})
