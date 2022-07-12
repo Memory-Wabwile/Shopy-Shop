@@ -174,3 +174,7 @@ def processOrder(request):
             )  
     return JsonResponse('Payment Complete' , safe=False)
     # create a guest checkout function 
+
+def search(request):
+
+    return render(request , 'store/search.html')
