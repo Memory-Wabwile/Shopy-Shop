@@ -1,5 +1,5 @@
 from email import message
-from turtle import title
+
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import *
@@ -178,5 +178,12 @@ def processOrder(request):
 
 def search(request):
     querry = request.GET['querry']
-    data = Product.objects.filter(title__icontains = querry).order_by('-id')
-    return render(request , 'store/search.html', {'data':data})
+    products = Product.objects.filter(name__icontains = querry).order_by('-id')
+
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+    
+    context = {'items':items , "order":order , 'cartItems':cartItems ,'products':products }
+    return render(request , 'store/search.html', context)
