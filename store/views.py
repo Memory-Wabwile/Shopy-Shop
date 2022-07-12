@@ -158,9 +158,10 @@ def processOrder(request):
     total =float(data['form']['total'])
     order.transaction_id = transaction_id
 
+# to prevent someone from changing the total from the console we have to countercheck the totals to match
     if total == order.get_cart_total:
         order.complete = True
-        order.save()
+    order.save()
 
     if order.shipping == True:
         ShippingAddress.objects.create(
