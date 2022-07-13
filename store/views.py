@@ -187,3 +187,4 @@ def search(request):
     
     context = {'items':items , "order":order , 'cartItems':cartItems ,'products':products }
     return render(request , 'store/search.html', context)
+     return render(request , 'store/search.html', context)
