@@ -188,8 +188,14 @@ def search(request):
     context = {'items':items , "order":order , 'cartItems':cartItems ,'products':products }
     return render(request , 'store/search.html', context)
 
-def details(request):
-
+def details(request,id):
+    
+    productId = ['productId']
+  
+   
+    product = Product.objects.get(id=id)
     message = "this is the details page"
-    context = {"message":message}
+    context = {"message":message,
+                "product":product}
+
     return render(request , 'store/details.html', context)
