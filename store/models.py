@@ -16,6 +16,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200 , null=True)
     #price = models.DecimalField(max_dgits=7 , decimal_places=2)
     price = models.FloatField()
+    description = models.CharField(max_length=200 , null=True)
     digital = models.BooleanField(default=False , null=True , blank=False)
     image = CloudinaryField('images/' , default='')
 

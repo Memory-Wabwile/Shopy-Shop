@@ -192,10 +192,17 @@ def details(request,id):
     
     productId = ['productId']
   
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
    
     product = Product.objects.get(id=id)
     message = "this is the details page"
     context = {"message":message,
-                "product":product}
+                "product":product,
+                'items':items ,
+                 "order":order , 
+                 'cartItems':cartItems ,}
 
     return render(request , 'store/details.html', context)
