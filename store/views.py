@@ -187,3 +187,9 @@ def search(request):
     
     context = {'items':items , "order":order , 'cartItems':cartItems ,'products':products }
     return render(request , 'store/search.html', context)
+
+def details(request):
+
+    message = "this is the details page"
+    context = {"message":message}
+    return render(request , 'store/details.html', context)
