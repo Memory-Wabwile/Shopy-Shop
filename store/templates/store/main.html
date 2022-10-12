@@ -97,9 +97,14 @@
             </form>
 
             <div class=" form-inline my-2 my-lg-0">
-                <!-- <a href="#" class="btn btn-warning"> Login </a> -->
 
-                <a href="{% url 'cart' %}">
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}"  class="btn btn-outline-success"> Logout </a> 
+                {% else %}
+                 <a href="{% url 'login' %}" style="background-color: orange;" class="btn"> Login </a>  
+                 {% endif %}
+                
+                 <a href="{% url 'cart' %}">
                     <img id="cart-icon" src="{% static 'images/cart.png' %}" alt="">
                 </a>
 
@@ -115,6 +120,11 @@
         {% endblock content %}
     </div>
 
+    <div style="height: 17vh; color: white; text-align: center; " class="footer bg bg-dark mt-5">
+        <h1 class="pt-3"> <em>Shoppy Shop</em> </h1>
+        <p> Copyright 	&#169; ShoppyShop , Inc  </p>
+        <p>Privacy policy</p>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

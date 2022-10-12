@@ -80,3 +80,4 @@ body{
 }
 
 /* details page styles */
+ /* <a href="{% url '' %}" class="btn btn-warning"> Login </a>  */

@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="container-fluid">
+<div style="min-height: 70vh;" class="container-fluid">
     <div class="row">
         <div class="col-md-6">
             <img class="thumbnails" src="{{product.imageURL}}" alt="" style="height: 400px; width: 100%;" >
@@ -10,8 +10,8 @@
 
         <div class="col-md-6 mt-4 ms-5 me-3 pl-5">
             <h1><strong>{{product.name}}</strong></h1>
-            <h2> Price : ${{product.price|floatformat:2}}</h2><br>
-            <h2><strong>Description : </strong> {{product.description}} </h2>
+            <h2> Price : $ {{product.price|floatformat:2}}</h2><br>
+            <h3><strong style="font-size: 40px;" >Description : </strong> {{product.description}} </h3>
             <button data-product={{product.id}} data-action="add" class="btn btn  add-btn update-cart " style="background-color: orange;" >Add to cart</button>
         </div>
     </div>
