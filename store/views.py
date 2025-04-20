@@ -9,7 +9,7 @@ import datetime
 from .utils import cookieCart , cartData , guestOrder
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from .forms import CreateUserForm
+from .forms import CreateUserForm , ProductForm
 from django.contrib.auth import authenticate , login , logout
 
 
@@ -76,6 +76,19 @@ def store(request):
 
     context = {'products':products , 'cartItems' : cartItems}
     return render (request , 'store/store.html' ,context)
+
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product created successfully!')
+            return redirect('store')  # Redirect to the store page after creation
+        else:
+            messages.error(request, 'There was an error creating the product.')
+    else:
+        form = ProductForm()
+    return render(request, 'store/create_product.html', {'form': form})
 
 def cart(request):
     # if request.user.is_authenticated:

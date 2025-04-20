@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-DATABASE_URL = 'postgresql://postgres:SuYYmGUEe0seVDmb88tM@containers-us-west-166.railway.app:6234/railway' 
+# DATABASE_URL = 'postgresql://postgres:SuYYmGUEe0seVDmb88tM@containers-us-west-166.railway.app:6234/railway' 
 
 # SECURITY WARNING: keep the secret key used in production secret!
 MODE=config("MODE", default="dev")
@@ -84,8 +84,17 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# development
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shopyshop',
+        'USER': 'postgres',
+        'PASSWORD': 'newpassword',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+# uncomment during production 
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=1000),
 }
