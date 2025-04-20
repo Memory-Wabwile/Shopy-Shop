@@ -27,6 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 # DATABASE_URL = 'postgresql://postgres:SuYYmGUEe0seVDmb88tM@containers-us-west-166.railway.app:6234/railway' 
+DATABASE_URL = 'postgresql://memory:UCqAdsLjZNVydPuOGRbXtFAkU3yHV0S3@dpg-d026gb6uk2gs73e5js50-a.oregon-postgres.render.com/shopyshop'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 MODE=config("MODE", default="dev")
