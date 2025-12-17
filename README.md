@@ -30,15 +30,15 @@
     source venv/bin/activate    # On Windows: `venv\Scripts\activate`  
 
 
-4. Install dependencies
+3. Install dependencies
    ```bash
     pip install -r requirements.txt
 
 
-6. Apply migrations and start the server
+4. Apply migrations and start the server
    ```bash
     python manage.py migrate  
     python manage.py runserver
 
-8. In your browser, go to http://127.0.0.1:8000/ to see the site
+5. In your browser, go to http://127.0.0.1:8000/ to see the site
 
