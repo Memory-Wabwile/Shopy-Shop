@@ -17,7 +17,7 @@
 - pip  
 - virtualenv (recommended)  
 
-## 🚀 Installation & Running Locally
+## Installation & Running Locally
 
 1. Clone the repo  
    ```bash
